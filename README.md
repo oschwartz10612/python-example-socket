@@ -12,6 +12,8 @@ Clone this repo to both Pis.
 git clone https://github.com/oschwartz10612/python-example-socket.git
 ```
 
+Edit the server.py and change the IP "localhost" to the IP of the client Pi. Edit the client.py and change the IP "localhost" to the IP of the server Pi.
+
 Run the server.py script on the server Pi and client.py on the client Pi. When you press the button, you should see a message on the server.
 ```
 python server.py
