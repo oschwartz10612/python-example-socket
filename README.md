@@ -3,7 +3,7 @@
 ## Setup
 You need a client and a server Raspberry Pi. The client will have your inputs (buttons, sensors, etc) the server will run your actions (run motors, print text, etc). For the example, connect a button to the client Pi as shown below.
 
-![Wiring Diagram](/assets/02_Push-button_bb-min.jpg | width=400)
+![Wiring Diagram](/assets/02_Push-button_bb-min.jpg)
 
 Clone this repo to both Pis.
 
