@@ -75,7 +75,7 @@ while True:
         sock.sendto("1", server_address)
 ```
 
-###Add more inputs?
+#### Add more inputs?
 Connect your input as instructed. Read its data and use the sendto() function to send the data to the server. Call this for all of your sensors. 
 
 On the server receive the data and process it. Identifiers for each sensor may be required.
