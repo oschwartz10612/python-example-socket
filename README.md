@@ -1,4 +1,5 @@
 # python-example-socket
+Example implementation of Python socket communication between Raspberry Pis. 
 
 ## Setup
 You need a client and a server Raspberry Pi. The client will have your inputs (buttons, sensors, etc) the server will run your actions (run motors, print text, etc). For the example, connect a button to the client Pi as shown below.
@@ -27,7 +28,7 @@ Read the comments and try to understand the code. Modify the client and the serv
 
 import socket
 
-# Create a TCP/IP socket
+# Create a UDP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 # Bind the socket to the port
