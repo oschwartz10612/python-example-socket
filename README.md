@@ -1,7 +1,7 @@
 # python-example-socket
 
-#Setup
-You need a client and a server Raspberry Pi. The client will have your inputs (buttons, sensors, etc) the server will run your actions (run motors, print textm, etc). For the example, connect a button to the client Pi as shown below.
+## Setup
+You need a client and a server Raspberry Pi. The client will have your inputs (buttons, sensors, etc) the server will run your actions (run motors, print text, etc). For the example, connect a button to the client Pi as shown below.
 
 ![Wiring Diagram](/assets/02_Push-button_bb-min.jpg)
 
@@ -18,10 +18,10 @@ python server.py
 python client.py
 ```
 
-#Explanation
+## Explanation
 Read the comments and try to understand the code. Modify the client and the server to get a better understanding of how they work.
 
-###Server
+#### Server
 ```python
 #Since there is no connection, per se, the server does not need to listen for and accept connections. It only needs to use bind() to associate its socket with a port, and then wait for individual messages.
 
@@ -39,7 +39,7 @@ sock.bind(server_address)
 #Messages are read from the socket using recvfrom(), which returns the data as well as the address of the client from which it was sent.
 
 while True:
-    #Recive a message from the client pi. This could be nothing so we need to check.
+    #Receive a message from the client pi. This could be nothing so we need to check.
     data, address = sock.recvfrom(4096)
 
     #If there is data, print it out and make a decision
@@ -49,7 +49,7 @@ while True:
             print("Button Pressed!")
 ```
 
-###Client
+#### Client
 ```python
 #The UDP echo client is similar the server, but does not use bind() to attach its socket to an address. It uses sendto() to deliver its message directly to the server, and recvfrom() to receive the response.
 
@@ -57,7 +57,7 @@ import socket #Import the socket
 
 import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
 
-#Setup Rraspberry Pi GPIO
+#Setup Raspberry Pi GPIO
 GPIO.setwarnings(False) # Ignore warning for now
 GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
 GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
