@@ -10,13 +10,17 @@ GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
 GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
 
 # Create a UDP socket
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
-#Connect to the server pi. Make sure to change the IP address.
-server_address = ('localhost', 3000)
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 #Run a loop and check for a button press on pin 10
 while True:
     if GPIO.input(10) == GPIO.HIGH:
         #If the button is pressed send to the server a message. 1 meaning pressed.
-        sock.sendto("1", server_address)
+        client_socket.sendto(data, ("IP", 6666))
+        print ("Sending request")
+
+        except Exception as ex:
+            print ex
+            raw_input()
+        
+        client_socket.close()

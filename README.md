@@ -30,26 +30,15 @@ Read the comments and try to understand the code. Modify the client and the serv
 
 import socket
 
-# Create a UDP/IP socket
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+# Create a Server Socket and wait for a client to connect
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+server_socket.bind(('', 6666))
+print ("UDP Server Waiting for client on port 6666")
 
-# Bind the socket to the port
-server_address = ('localhost', 3000)
-print('Starting server on port 3000')
-
-sock.bind(server_address)
-
-#Messages are read from the socket using recvfrom(), which returns the data as well as the address of the client from which it was sent.
-
+# Recive data from client and decide which function to call
 while True:
-    #Receive a message from the client pi. This could be nothing so we need to check.
-    data, address = sock.recvfrom(4096)
-
-    #If there is data, print it out and make a decision
-    if data:
-        print(data)
-        if data == "1":
-            print("Button Pressed!")
+    dataFromClient, address = server_socket.recvfrom(256)
+    print(dataFromClient)
 ```
 
 #### Client
@@ -60,22 +49,26 @@ import socket #Import the socket
 
 import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
 
-#Setup Raspberry Pi GPIO
+#Setup Rraspberry Pi GPIO
 GPIO.setwarnings(False) # Ignore warning for now
 GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
 GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
 
 # Create a UDP socket
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
-#Connect to the server pi. Make sure to change the IP address.
-server_address = ('localhost', 3000)
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 #Run a loop and check for a button press on pin 10
 while True:
     if GPIO.input(10) == GPIO.HIGH:
         #If the button is pressed send to the server a message. 1 meaning pressed.
-        sock.sendto("1", server_address)
+        client_socket.sendto(data, ("IP", 6666))
+        print ("Sending request")
+
+        except Exception as ex:
+            print ex
+            raw_input()
+        
+        client_socket.close()
 ```
 
 #### Add more inputs?
